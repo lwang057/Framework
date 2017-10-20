@@ -4,7 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
-
+/**
+ * MainActivity.class
+ *
+ * @author lwang
+ * @date 2017/10/20.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
