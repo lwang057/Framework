@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin1">0.5555555555555556dp</dimen>
+    <dimen name="margin2">1.1111111111111112dp</dimen>
+    <dimen name="margin4">2.2222222222222223dp</dimen>
+    <dimen name="margin5">2.7777777777777777dp</dimen>
+    <dimen name="margin6">3.3333333333333335dp</dimen>
+    <dimen name="margin7">3.888888888888889dp</dimen>
+    <dimen name="margin8">4.444444444444445dp</dimen>
+    <dimen name="margin9">5.0dp</dimen>
+    <dimen name="margin10">5.555555555555555dp</dimen>
+</resources>

@@ -1,9 +1,12 @@
-package com.lwang.framework;
+package com.lwang.framework.v.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+
+import com.lwang.framework.R;
+
 /**
  * MainActivity.class
  *

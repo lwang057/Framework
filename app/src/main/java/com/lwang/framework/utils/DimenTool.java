@@ -1,4 +1,4 @@
-package com.lwang.framework;
+package com.lwang.framework.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
