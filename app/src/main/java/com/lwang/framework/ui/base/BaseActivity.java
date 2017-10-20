@@ -1,4 +1,4 @@
-package com.lwang.framework.v.base;
+package com.lwang.framework.ui.base;
 
 /**
  * BaseActivity.class
