@@ -10,5 +10,6 @@ package com.lwang.framework.model;
 public interface AppApi {
 
 
+    String BASE_URL = "";
 
 }
