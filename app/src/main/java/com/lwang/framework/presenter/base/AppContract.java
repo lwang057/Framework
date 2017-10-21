@@ -1,4 +1,4 @@
-package com.lwang.framework.presenter;
+package com.lwang.framework.presenter.base;
 
 import com.lwang.framework.ui.base.IBaseView;
 
