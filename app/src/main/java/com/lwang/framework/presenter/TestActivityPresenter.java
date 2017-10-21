@@ -5,28 +5,26 @@ import android.content.Intent;
 import com.lwang.framework.model.ErrorListener;
 import com.lwang.framework.presenter.base.AppContract;
 import com.lwang.framework.presenter.base.BasePresenter;
-import com.lwang.framework.ui.activity.TestActivity;
 
 import javax.inject.Inject;
 
 /**
- * MainActivityPresenter.class
+ * TestActivityPresenter.class
  *
  * @author lwang
  * @date 2017/10/21.
  */
 
-public class MainActivityPresenter extends BasePresenter<AppContract.MainActivityView> {
+public class TestActivityPresenter extends BasePresenter<AppContract.TestActivityView> {
 
     @Inject
-    public MainActivityPresenter(ErrorListener errorListener) {
+    public TestActivityPresenter(ErrorListener errorListener) {
         super(errorListener);
     }
 
-    public void requestData() {
+    public void requestData(){
 
         mView.showLoading();
-        context.startActivity(new Intent(context, TestActivity.class));
         mView.hideLoading();
         mView.showResult();
     };
@@ -35,7 +33,6 @@ public class MainActivityPresenter extends BasePresenter<AppContract.MainActivit
     @Override
     public void getData(Intent intent) {
 
-
     }
 
     @Override
@@ -43,5 +40,6 @@ public class MainActivityPresenter extends BasePresenter<AppContract.MainActivit
 
 
     }
+
 
 }

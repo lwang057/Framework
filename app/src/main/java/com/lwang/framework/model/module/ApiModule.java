@@ -21,4 +21,12 @@ public class ApiModule {
         return new Retrofit.Builder();
     }
 
+
+//    @Provides
+//    public AppApi provideApiFactory(){
+//
+//        return AppApi;
+//    }
+
+
 }

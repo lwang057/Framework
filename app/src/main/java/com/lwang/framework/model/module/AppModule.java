@@ -2,8 +2,6 @@ package com.lwang.framework.model.module;
 
 import android.app.Application;
 
-import com.lwang.framework.app.AppNavigate;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -25,11 +23,6 @@ public class AppModule {
     @Provides
     public Application provideApplication() {
         return mApplication;
-    }
-
-    @Provides
-    public AppNavigate provideAppNavite(){
-        return new AppNavigate();
     }
 
 }

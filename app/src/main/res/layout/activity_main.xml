@@ -7,10 +7,10 @@
     tools:context="com.lwang.framework.ui.activity.MainActivity">
 
     <Button
+        android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:onClick="button"
         android:text="查询/跳转页面" />
 </RelativeLayout>
 

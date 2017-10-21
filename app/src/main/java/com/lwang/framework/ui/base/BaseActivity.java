@@ -43,10 +43,12 @@ public abstract class BaseActivity<T extends BasePresenter> extends RxAppCompatA
         // 此方法是给Presenter 传递当前Activety的上下文 必须写在getData前面
         mPresenter.getContext(context);
         mPresenter.getData(getIntent());
+        initView();
     }
 
     protected abstract void inject(ApiComponent apiComponent);
     protected abstract int getLayoutId();
+    protected abstract void initView();
 
     @Override
     protected void onResume() {
