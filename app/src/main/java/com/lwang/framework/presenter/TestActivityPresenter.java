@@ -1,8 +1,11 @@
 package com.lwang.framework.presenter;
 
 import android.content.Intent;
+import android.util.Log;
 
-import com.lwang.framework.model.ErrorListener;
+import com.lwang.framework.model.api.ApiUtil;
+import com.lwang.framework.model.api.AppApi;
+import com.lwang.framework.model.bean.Result;
 import com.lwang.framework.presenter.base.AppContract;
 import com.lwang.framework.presenter.base.BasePresenter;
 
@@ -17,17 +20,26 @@ import javax.inject.Inject;
 
 public class TestActivityPresenter extends BasePresenter<AppContract.TestActivityView> {
 
+    private AppApi appApi;
+
     @Inject
-    public TestActivityPresenter(ErrorListener errorListener) {
-        super(errorListener);
+    public TestActivityPresenter(AppApi appApi) {
+        this.appApi = appApi;
     }
 
-    public void requestData(){
+    public void requestData(String phone, String key) {
 
+        Log.i("wang", "phone:::"+phone);
         mView.showLoading();
-        mView.hideLoading();
-        mView.showResult();
-    };
+        appApi.getLocation(phone, key)
+                .compose(ApiUtil.bindToLifecycle(mView))
+                .compose(ApiUtil.genTransformer())
+                .subscribe((Result result) -> {
+
+                    mView.hideLoading();
+                    mView.showResult(result);
+                }, ApiUtil::doOnError);
+    }
 
 
     @Override

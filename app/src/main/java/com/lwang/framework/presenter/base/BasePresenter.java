@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.lwang.framework.model.ErrorListener;
 import com.lwang.framework.ui.base.IBaseView;
 
 import java.lang.ref.Reference;
@@ -22,13 +21,10 @@ public class BasePresenter<View extends IBaseView> {
     protected Context context;
     protected View mView;
     protected Reference<View> reference;
-    protected ErrorListener errorListener;
     private boolean isViewAttach;
 
-    public BasePresenter(ErrorListener errorListener) {
-        this.errorListener = errorListener;
+    public BasePresenter() {
     }
-
 
     public void attachView(View view) {
 

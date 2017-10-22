@@ -1,6 +1,7 @@
 package com.lwang.framework.app;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
 
 import com.lwang.framework.model.component.ApiComponent;
 
@@ -13,11 +14,13 @@ import com.lwang.framework.model.component.ApiComponent;
 
 public class MyApplication extends Application {
 
+    private static MyApplication instance;
     private AppDeletage appDeletage;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
 
         appDeletage = new AppDeletage(this);
         appDeletage.onCreate();
@@ -35,5 +38,10 @@ public class MyApplication extends Application {
         return appDeletage.getApiComponent();
     }
 
+
+    @NonNull
+    public static MyApplication getInstance() {
+        return instance;
+    }
 
 }

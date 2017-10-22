@@ -1,10 +1,11 @@
 package com.lwang.framework.ui.activity;
 
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lwang.framework.R;
+import com.lwang.framework.model.api.AppApi;
+import com.lwang.framework.model.bean.Result;
 import com.lwang.framework.model.component.ApiComponent;
 import com.lwang.framework.presenter.TestActivityPresenter;
 import com.lwang.framework.presenter.base.AppContract;
@@ -35,12 +36,7 @@ public class TestActivity extends BaseActivity<TestActivityPresenter> implements
 
     @Override
     protected void initView() {
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.requestData();
-            }
-        });
+        tv.setOnClickListener(v -> mPresenter.requestData("18137783319", AppApi.KEY));
     }
 
 
@@ -55,9 +51,10 @@ public class TestActivity extends BaseActivity<TestActivityPresenter> implements
     }
 
     @Override
-    public void showResult() {
+    public void showResult(Result result) {
 
-        Toast.makeText(this, "TestActivity", Toast.LENGTH_SHORT).show();
+        String city = result.getCity();
+        Toast.makeText(this, "TestActivity" + city, Toast.LENGTH_SHORT).show();
     }
 
 

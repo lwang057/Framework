@@ -2,7 +2,6 @@ package com.lwang.framework.presenter;
 
 import android.content.Intent;
 
-import com.lwang.framework.model.ErrorListener;
 import com.lwang.framework.presenter.base.AppContract;
 import com.lwang.framework.presenter.base.BasePresenter;
 import com.lwang.framework.ui.activity.TestActivity;
@@ -19,8 +18,7 @@ import javax.inject.Inject;
 public class MainActivityPresenter extends BasePresenter<AppContract.MainActivityView> {
 
     @Inject
-    public MainActivityPresenter(ErrorListener errorListener) {
-        super(errorListener);
+    public MainActivityPresenter() {
     }
 
     public void requestData() {

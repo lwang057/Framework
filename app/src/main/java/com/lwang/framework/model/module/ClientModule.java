@@ -1,20 +1,16 @@
 package com.lwang.framework.model.module;
 
-import android.app.Application;
+import com.lwang.framework.app.MyApplication;
+import com.lwang.framework.model.api.RequestInterceptor;
 
-import com.lwang.framework.model.ErrorListener;
-import com.lwang.framework.model.HttpsUtils;
-import com.lwang.framework.model.RxErrorHandler;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
-import javax.net.ssl.HostnameVerifier;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 
@@ -27,6 +23,8 @@ import okhttp3.OkHttpClient;
 @Module
 public class ClientModule {
 
+    private static final String RETROFIT_CACHE_FILE_NAME = "retrofit";
+
 
     @Singleton
     @Provides
@@ -34,65 +32,25 @@ public class ClientModule {
         return new OkHttpClient.Builder();
     }
 
+    @Singleton
+    @Provides
+    public Interceptor provideInterceptor() {
+        return new RequestInterceptor();
+    }
+
 
     @Singleton
     @Provides
-    public OkHttpClient provideClient(Application application,
-                                      OkHttpClient.Builder builder,
-                                      Interceptor interceptor,
-                                      List<Interceptor> interceptors,
-                                      HostnameVerifier hostnameVerifier) {
+    public OkHttpClient provideClient(OkHttpClient.Builder builder, Interceptor interceptor) {
 
-        builder.connectTimeout(10, TimeUnit.SECONDS)
+        builder.cache(new Cache(new File(MyApplication.getInstance().getCacheDir(), RETROFIT_CACHE_FILE_NAME), 10 * 1024 * 1024)) // 设置缓存路径和大小
+                .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
-                .addNetworkInterceptor(interceptor)
-                .hostnameVerifier(hostnameVerifier);
-
-        for (Interceptor mInterceptor : interceptors) {
-            builder.addInterceptor(mInterceptor);
-        }
+                .addInterceptor(interceptor);
 
         return builder.build();
     }
 
-
-
-//    @Singleton
-//    @Provides
-//    public List<Interceptor> provideInterceptors(Application context){
-//
-//        List<Interceptor> interceptors = new ArrayList<>();
-//        interceptors.add();
-//    }
-
-    /**
-     @Singleton
-     @Provides
-     List<Interceptor> provideInterceptors(Application context) {
-     List<Interceptor> interceptors = new ArrayList<>();
-     interceptors.add(new RequestInterceptor(context));
-     interceptors.add(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
-     return interceptors;
-     }
-
-     @Singleton
-     @Provides       //network拦截器
-     Interceptor provodeInterceptor(){
-     return new StethoInterceptor();
-     }
-     * @return
-     */
-
-    @Singleton
-    @Provides
-    public HostnameVerifier provideHostnameVerifier(){
-        return new HttpsUtils.UnSafeHostnameVerifier();
-    }
-
-    @Provides
-    public ErrorListener provideErrorHandler() {
-        return new RxErrorHandler();
-    }
 
 }
