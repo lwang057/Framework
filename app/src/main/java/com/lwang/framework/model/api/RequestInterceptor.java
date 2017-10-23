@@ -1,8 +1,13 @@
 package com.lwang.framework.model.api;
 
+import android.content.Context;
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -19,31 +24,35 @@ import okhttp3.Response;
 
 public class RequestInterceptor implements Interceptor {
 
+    private final int DEVICE_TYPE = 1; // 设备类型
+    private Context context;
+
+
+    public RequestInterceptor(Context context) {
+        this.context = context;
+    }
+
+
     @Override
     public Response intercept(Chain chain) throws IOException {
 
-        // 这个chain里面包含了request和response，所以要什么都可以从这里拿
-        Request request1 = chain.request();
+        Request original = chain.request();
+
+        Request.Builder requestBuilder = original.newBuilder()
+                .header("data", fetchHeaderInfo())
+                .method(original.method(), original.body());
+
+        return chain.proceed(requestBuilder.build());
+    }
 
 
-        Log.i("wang", String.format("发送请求: [%s] %s%n%s",
-                request1.url(), chain.connection(), request1.headers()));
+    private String fetchHeaderInfo() {
 
-        Response response = chain.proceed(request1);
-        Log.i("wang", "response::::::::::::::::::" + response);
+        Map<String, String> map = new HashMap<>();
+        map.put("DeviceType", String.valueOf(DEVICE_TYPE));
+        JSONObject json = new JSONObject(map);
 
-        Log.i("wang", String.format("接收响应: [%s] %.1fms%n%s",
-                response.request().url(), 1e6d, response.headers()));
-
-        // 给每个请求添加请求头
-//        Request.Builder builder = request1.newBuilder();
-//                .addHeader("version", Utils.getVersionName())
-//                .addHeader("timestamp", DateUtils.getTime())
-//                .addHeader("platform", Constants.ANDROID)
-//                .addHeader("token", Constants.TOKEN);
-
-//        Request request = builder.build();
-        return response;
+        return json.toString();
     }
 
 }

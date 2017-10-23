@@ -39,10 +39,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends RxAppCompatA
         mPresenter.attachView(this);
         setContentView(getLayoutId());
         unbinder = ButterKnife.bind(this);
-
-        // 此方法是给Presenter 传递当前Activety的上下文 必须写在getData前面
-        mPresenter.getContext(context);
-        mPresenter.getData(getIntent());
         initView();
     }
 
@@ -51,18 +47,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends RxAppCompatA
     protected abstract int getLayoutId();
 
     protected abstract void initView();
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.onTakeView();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        mPresenter.onActivityResult(requestCode, requestCode, data);
-    }
 
     @Override
     protected void onDestroy() {

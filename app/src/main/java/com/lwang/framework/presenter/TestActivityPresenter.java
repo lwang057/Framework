@@ -1,15 +1,19 @@
 package com.lwang.framework.presenter;
 
-import android.content.Intent;
 import android.util.Log;
+
 
 import com.lwang.framework.model.api.ApiUtil;
 import com.lwang.framework.model.api.AppApi;
-import com.lwang.framework.model.bean.Result;
+import com.lwang.framework.model.api.RequestCallback;
+import com.lwang.framework.model.bean.LocationBean;
 import com.lwang.framework.presenter.base.AppContract;
 import com.lwang.framework.presenter.base.BasePresenter;
 
 import javax.inject.Inject;
+
+import io.reactivex.annotations.NonNull;
+
 
 /**
  * TestActivityPresenter.class
@@ -29,31 +33,25 @@ public class TestActivityPresenter extends BasePresenter<AppContract.TestActivit
 
     public void requestData(String phone) {
 
-        Log.i("wang", "phone:::" + phone);
-
         mView.showLoading();
         appApi.getLocation(phone, AppApi.KEY)
-                .compose(ApiUtil.bindToLifecycle(mView))
-                .compose(ApiUtil.genTransformer())
-                .subscribe((Result result) -> {
+                .compose(ApiUtil.<LocationBean>getSchedulerTransformer())
+                .subscribe(new RequestCallback<LocationBean>() {
+                    @Override
+                    public void onNext(@NonNull LocationBean locationBean) {
+                        super.onNext(locationBean);
+                        mView.hideLoading();
+                        mView.showResult(locationBean);
+                    }
 
-                    mView.hideLoading();
-                    mView.showResult(result);
-                }, ApiUtil::doOnError);
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        super.onError(e);
+                        mView.hideLoading();
+
+                        Log.i("wang", e + "");
+                    }
+                });
     }
-
-
-
-    @Override
-    public void getData(Intent intent) {
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int requestCode1, Intent data) {
-
-
-    }
-
 
 }

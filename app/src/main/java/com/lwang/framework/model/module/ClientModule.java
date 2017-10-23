@@ -1,18 +1,23 @@
 package com.lwang.framework.model.module;
 
-import com.lwang.framework.app.MyApplication;
+import android.app.Application;
+
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.lwang.framework.model.api.ApiUtil;
 import com.lwang.framework.model.api.RequestInterceptor;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
+import javax.net.ssl.HostnameVerifier;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * ClientModule.class
@@ -23,7 +28,7 @@ import okhttp3.OkHttpClient;
 @Module
 public class ClientModule {
 
-    private static final String RETROFIT_CACHE_FILE_NAME = "retrofit";
+    private static int TIME_OUT = 60_000;
 
 
     @Singleton
@@ -32,22 +37,38 @@ public class ClientModule {
         return new OkHttpClient.Builder();
     }
 
+
     @Singleton
     @Provides
-    public Interceptor provideInterceptor() {
-        return new RequestInterceptor();
+    List<Interceptor> provideInterceptors(Application context) {
+        List<Interceptor> interceptors = new ArrayList<>();
+        interceptors.add(new RequestInterceptor(context));
+        interceptors.add(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
+        return interceptors;
     }
 
 
     @Singleton
     @Provides
-    public OkHttpClient provideClient(OkHttpClient.Builder builder, Interceptor interceptor) {
+    Interceptor provodeInterceptor() {
+        return new StethoInterceptor();
+    }
 
-        builder.cache(new Cache(new File(MyApplication.getInstance().getCacheDir(), RETROFIT_CACHE_FILE_NAME), 10 * 1024 * 1024)) // 设置缓存路径和大小
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
-                .addInterceptor(interceptor);
+
+    @Singleton
+    @Provides
+    OkHttpClient provideClient(OkHttpClient.Builder builder,
+                               Interceptor interceptor,
+                               List<Interceptor> interceptors) {
+
+        builder.connectTimeout(TIME_OUT, TimeUnit.MILLISECONDS)
+                .writeTimeout(TIME_OUT, TimeUnit.MILLISECONDS)
+                .readTimeout(TIME_OUT, TimeUnit.MILLISECONDS)
+                .addNetworkInterceptor(interceptor);
+
+        for (Interceptor tempInterceptor : interceptors) {
+            builder.addInterceptor(tempInterceptor);
+        }
 
         return builder.build();
     }

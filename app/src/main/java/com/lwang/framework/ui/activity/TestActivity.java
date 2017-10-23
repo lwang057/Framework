@@ -5,7 +5,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lwang.framework.R;
-import com.lwang.framework.model.bean.Result;
+import com.lwang.framework.model.bean.LocationBean;
 import com.lwang.framework.model.component.ApiComponent;
 import com.lwang.framework.presenter.TestActivityPresenter;
 import com.lwang.framework.presenter.base.AppContract;
@@ -64,10 +64,13 @@ public class TestActivity extends BaseActivity<TestActivityPresenter> implements
     }
 
     @Override
-    public void showResult(Result result) {
+    public void showResult(LocationBean locationBean) {
 
-        String city = result.getCity();
-        Toast.makeText(this, "TestActivity" + city, Toast.LENGTH_SHORT).show();
+        String province = locationBean.result.province;
+        String city = locationBean.result.city;
+        String company = locationBean.result.company;
+
+        Toast.makeText(context, province + city + ":" + company, Toast.LENGTH_SHORT).show();
     }
 
 

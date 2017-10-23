@@ -18,10 +18,8 @@ import java.lang.ref.WeakReference;
  */
 public class BasePresenter<View extends IBaseView> {
 
-    protected Context context;
     protected View mView;
     protected Reference<View> reference;
-    private boolean isViewAttach;
 
     public BasePresenter() {
     }
@@ -39,57 +37,6 @@ public class BasePresenter<View extends IBaseView> {
             reference.clear();
         }
         reference = null;
-    }
-
-
-    public void getContext(Context context){
-        this.context = context;
-    }
-
-
-    /**
-     * 页面跳转可以携带数据过来
-     * @param intent
-     */
-    public void getData(Intent intent){
-
-    }
-
-
-    /**
-     * 页面跳转 数据回传 Presenter写此方法拿回传数据
-     * @param requestCode
-     * @param requestCode1
-     * @param data
-     */
-    public void onActivityResult(int requestCode, int requestCode1, Intent data){
-
-    }
-
-
-    /**
-     * 如果需要进来就要联网请求数据，Presenter 中覆写此方法
-     */
-    public void onTakeView(){
-        if(!isViewAttach){
-            isViewAttach = true;
-            onOnceTakeView();
-        }
-    }
-
-    /**
-     * 如果只需要第一次加载页面联网请求数据，Presenter 中覆写次方法
-     */
-    private void onOnceTakeView() {
-
-    }
-
-    public void getArguments(Bundle bundle){
-
-    }
-
-    public void onHiddenChanged(boolean hidden){
-
     }
 
 }

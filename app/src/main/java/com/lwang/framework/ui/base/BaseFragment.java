@@ -44,21 +44,12 @@ public abstract class BaseFragment<T extends BasePresenter> extends RxFragment i
         inject(((MyApplication) getActivity().getApplication()).getApiComponent());
 
         mPresenter.attachView(this);
-        mPresenter.getContext(getActivity());
-        mPresenter.getData(getActivity().getIntent());
-        mPresenter.getArguments(getArguments());
     }
 
     protected abstract void inject(ApiComponent apiComponent);
 
     protected abstract int getLayoutId();
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mPresenter.onTakeView();
-    }
 
     @Override
     public void onDestroyView() {
