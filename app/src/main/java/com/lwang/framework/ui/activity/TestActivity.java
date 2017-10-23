@@ -1,10 +1,10 @@
 package com.lwang.framework.ui.activity;
 
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lwang.framework.R;
-import com.lwang.framework.model.api.AppApi;
 import com.lwang.framework.model.bean.Result;
 import com.lwang.framework.model.component.ApiComponent;
 import com.lwang.framework.presenter.TestActivityPresenter;
@@ -21,8 +21,10 @@ import butterknife.BindView;
  */
 public class TestActivity extends BaseActivity<TestActivityPresenter> implements AppContract.TestActivityView {
 
-    @BindView(R.id.tv)
-    TextView tv;
+    @BindView(R.id.edt)
+    EditText edt;
+    @BindView(R.id.btn)
+    Button button;
 
     @Override
     protected void inject(ApiComponent apiComponent) {
@@ -36,7 +38,18 @@ public class TestActivity extends BaseActivity<TestActivityPresenter> implements
 
     @Override
     protected void initView() {
-        tv.setOnClickListener(v -> mPresenter.requestData("18137783319", AppApi.KEY));
+
+        button.setOnClickListener(v -> {
+
+            String phone = edt.getText().toString().trim();
+            if (!phone.matches("^1[34578][0-9]{9}$")) {
+                edt.setText("");
+                edt.setHint("请输入正确的手机号");
+                return;
+            }
+
+            mPresenter.requestData(phone);
+        });
     }
 
 

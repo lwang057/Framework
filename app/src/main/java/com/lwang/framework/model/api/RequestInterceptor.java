@@ -30,6 +30,7 @@ public class RequestInterceptor implements Interceptor {
                 request1.url(), chain.connection(), request1.headers()));
 
         Response response = chain.proceed(request1);
+        Log.i("wang", "response::::::::::::::::::" + response);
 
         Log.i("wang", String.format("接收响应: [%s] %.1fms%n%s",
                 response.request().url(), 1e6d, response.headers()));

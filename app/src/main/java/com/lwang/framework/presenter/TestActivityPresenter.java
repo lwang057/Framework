@@ -27,11 +27,12 @@ public class TestActivityPresenter extends BasePresenter<AppContract.TestActivit
         this.appApi = appApi;
     }
 
-    public void requestData(String phone, String key) {
+    public void requestData(String phone) {
 
-        Log.i("wang", "phone:::"+phone);
+        Log.i("wang", "phone:::" + phone);
+
         mView.showLoading();
-        appApi.getLocation(phone, key)
+        appApi.getLocation(phone, AppApi.KEY)
                 .compose(ApiUtil.bindToLifecycle(mView))
                 .compose(ApiUtil.genTransformer())
                 .subscribe((Result result) -> {
@@ -40,6 +41,7 @@ public class TestActivityPresenter extends BasePresenter<AppContract.TestActivit
                     mView.showResult(result);
                 }, ApiUtil::doOnError);
     }
+
 
 
     @Override

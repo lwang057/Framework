@@ -1,6 +1,6 @@
 package com.lwang.framework.ui.activity;
 
-import android.view.View;
+import android.content.Intent;
 import android.widget.Button;
 
 import com.lwang.framework.R;
@@ -34,13 +34,7 @@ public class MainActivity extends BaseActivity<MainActivityPresenter> implements
 
     @Override
     protected void initView() {
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.requestData();
-            }
-        });
+        button.setOnClickListener(v -> mPresenter.requestData());
     }
 
 
@@ -57,7 +51,7 @@ public class MainActivity extends BaseActivity<MainActivityPresenter> implements
 
     @Override
     public void showResult() {
-
+        startActivity(new Intent(this, TestActivity.class));
     }
 
 

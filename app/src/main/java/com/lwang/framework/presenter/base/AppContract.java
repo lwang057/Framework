@@ -11,12 +11,12 @@ import com.lwang.framework.ui.base.IBaseView;
  */
 public interface AppContract {
 
-    interface MainActivityView extends IBaseView{
+    interface MainActivityView extends IBaseView {
         void showResult();
     }
 
 
-    interface TestActivityView extends IBaseView{
+    interface TestActivityView extends IBaseView {
         void showResult(Result result);
     }
 

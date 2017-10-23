@@ -34,7 +34,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends RxAppCompatA
         super.onCreate(savedInstanceState);
 
         this.context = this;
-        inject(((MyApplication)getApplication()).getApiComponent());
+        inject(((MyApplication) getApplication()).getApiComponent());
 
         mPresenter.attachView(this);
         setContentView(getLayoutId());
@@ -47,7 +47,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends RxAppCompatA
     }
 
     protected abstract void inject(ApiComponent apiComponent);
+
     protected abstract int getLayoutId();
+
     protected abstract void initView();
 
     @Override
