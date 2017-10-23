@@ -1,14 +1,12 @@
-package com.lwang.framework.presenter.base;
+package com.lwang.framework.ui.base;
 
 import com.lwang.framework.model.bean.LocationBean;
-import com.lwang.framework.model.bean.Result;
-import com.lwang.framework.ui.base.IBaseView;
 
 /**
  * AppContract.class
  *
  * @author lwang
- * @date 2017/10/21.
+ * @date 2017/10/23.
  */
 public interface AppContract {
 
@@ -20,5 +18,4 @@ public interface AppContract {
     interface TestActivityView extends IBaseView {
         void showResult(LocationBean locationBean);
     }
-
 }

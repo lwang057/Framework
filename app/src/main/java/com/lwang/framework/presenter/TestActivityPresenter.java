@@ -7,8 +7,7 @@ import com.lwang.framework.model.api.ApiUtil;
 import com.lwang.framework.model.api.AppApi;
 import com.lwang.framework.model.api.RequestCallback;
 import com.lwang.framework.model.bean.LocationBean;
-import com.lwang.framework.presenter.base.AppContract;
-import com.lwang.framework.presenter.base.BasePresenter;
+import com.lwang.framework.ui.base.AppContract;
 
 import javax.inject.Inject;
 

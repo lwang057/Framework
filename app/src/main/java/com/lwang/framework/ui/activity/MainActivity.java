@@ -6,7 +6,7 @@ import android.widget.Button;
 import com.lwang.framework.R;
 import com.lwang.framework.model.component.ApiComponent;
 import com.lwang.framework.presenter.MainActivityPresenter;
-import com.lwang.framework.presenter.base.AppContract;
+import com.lwang.framework.ui.base.AppContract;
 import com.lwang.framework.ui.base.BaseActivity;
 
 import butterknife.BindView;

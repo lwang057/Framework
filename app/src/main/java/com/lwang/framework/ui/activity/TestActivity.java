@@ -8,7 +8,7 @@ import com.lwang.framework.R;
 import com.lwang.framework.model.bean.LocationBean;
 import com.lwang.framework.model.component.ApiComponent;
 import com.lwang.framework.presenter.TestActivityPresenter;
-import com.lwang.framework.presenter.base.AppContract;
+import com.lwang.framework.ui.base.AppContract;
 import com.lwang.framework.ui.base.BaseActivity;
 
 import butterknife.BindView;

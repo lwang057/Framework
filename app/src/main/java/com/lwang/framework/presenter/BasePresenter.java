@@ -1,20 +1,15 @@
-package com.lwang.framework.presenter.base;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
+package com.lwang.framework.presenter;
 
 import com.lwang.framework.ui.base.IBaseView;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
-
 /**
  * BasePresenter.class
  *
  * @author lwang
- * @date 2017/10/21.
+ * @date 2017/10/23.
  */
 public class BasePresenter<View extends IBaseView> {
 

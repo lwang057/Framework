@@ -1,8 +1,7 @@
 package com.lwang.framework.presenter;
 
 
-import com.lwang.framework.presenter.base.AppContract;
-import com.lwang.framework.presenter.base.BasePresenter;
+import com.lwang.framework.ui.base.AppContract;
 
 import javax.inject.Inject;
 

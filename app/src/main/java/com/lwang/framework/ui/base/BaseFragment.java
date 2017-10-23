@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.lwang.framework.app.MyApplication;
 import com.lwang.framework.model.component.ApiComponent;
-import com.lwang.framework.presenter.base.BasePresenter;
+import com.lwang.framework.presenter.BasePresenter;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
 import javax.inject.Inject;

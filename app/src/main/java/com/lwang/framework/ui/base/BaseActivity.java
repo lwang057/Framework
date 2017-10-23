@@ -1,12 +1,11 @@
 package com.lwang.framework.ui.base;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.lwang.framework.app.MyApplication;
 import com.lwang.framework.model.component.ApiComponent;
-import com.lwang.framework.presenter.base.BasePresenter;
+import com.lwang.framework.presenter.BasePresenter;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import javax.inject.Inject;
